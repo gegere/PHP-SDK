@@ -15,12 +15,26 @@
 	if (strstr($_SERVER['HTTP_USER_AGENT'], 'Checkfront') || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 
 		$notifications = new Notification();
-		$notifications->ParseNotificationData();		
+		$notifications->ParseNotificationData();
 
-		$db = new DB('localhost', 'username', 'P@$sw0rD', 'domain_com');
-		$db->write('notifications', $notifications->dataArray);
+		$db = new MysqliDb('localhost', 'username', 'P@$sw0rD', 'domain_com');
 
-		echo "Ok";
+		if (is_array($notifications->dataArray))
+		{
+			foreach ( $notifications->dataArray as $data ) 
+			{
+				$db->insert('notifications', $data);
+			}
+			
+			echo "Ok";
+
+		} else {
+
+			// Any errors? Let's review in the logs
+			error_log(print_r($notifications->dataArray, TRUE), 0);
+
+		}
+
 
 #	    fwrite($fh, serialize($notifications->dataArray));
 #	    fclose($fh);
