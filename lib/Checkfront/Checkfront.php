@@ -3,7 +3,7 @@
  * Checkfront SDK 
  * PHP 5 
  *
- * @package     CheckfrontAPI
+ * @package     Checkfront
  * @author      Checkfront <code@checkfront.com>
  * @copyright   2008-2014 Checkfront Inc 
  * @license     http://opensource.org/licenses/bsd-license.php New BSD License
@@ -42,7 +42,7 @@
  * @access public
  * @package Checkfront
 */
-class CheckfrontAPI {
+class Checkfront {
 
 	protected $sdk_version = '1.3';
 	protected $api_version = '3.0';
