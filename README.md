@@ -4,6 +4,8 @@
 The [Checkfront Booking API](http://www.checkfront.com/developers/api/) allows you 
 to build integrations and custom applications that interact with a remote Checkfront account.
 
+[![Build Status](https://travis-ci.org/gegere/PHP-SDK.svg?branch=feature/travis-ci)](https://travis-ci.org/gegere/PHP-SDK)
+
 
 ##Updates
 
