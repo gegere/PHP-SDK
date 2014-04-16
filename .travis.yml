@@ -21,4 +21,8 @@ install:
 script: php test/Checkfront.php
 
 notifications:
-  email: true
+  email:
+    recipients:
+    - jason+ci@htmlgraphic.com
+    on_success: change
+    on_failure: change
