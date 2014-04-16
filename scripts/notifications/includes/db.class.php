@@ -14,7 +14,7 @@ class DB
 	private $password;
 	private $database;
 
-	public function  __construct() 
+	public function  __construct($host, $username, $password, $db, $port = NULL)
 	{
 
 		$this->host 	= 'localhost';
@@ -22,7 +22,7 @@ class DB
 		$this->password = 'password';
 		$this->database = 'the_database';
 
-	    $this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->database);
+	    $this->mysqli = new mysqli($host, $username, $password, $db, $port);
 	
 	    if (mysqli_connect_errno()) {
 	    		error_log("DB connection failed: " . mysqli_connect_error());

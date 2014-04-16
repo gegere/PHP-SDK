@@ -11,13 +11,13 @@
 
 #if ( $fh ) {
 
-
 	// Check if the post is coming from Checkfront servers
-	if (strstr($_SERVER['HTTP_USER_AGENT'], 'Checkfront')) {
+	if (strstr($_SERVER['HTTP_USER_AGENT'], 'Checkfront') || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 
 		$notifications = new Notification();
 		$notifications->ParseNotificationData();		
-		$db = new DB();
+
+		$db = new DB('localhost', 'username', 'P@$sw0rD', 'domain_com');
 		$db->write('notifications', $notifications->dataArray);
 
 		echo "Ok";

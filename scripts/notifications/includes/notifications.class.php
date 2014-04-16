@@ -2,43 +2,29 @@
 
 /*
 
-Logging the notifications sent from Checkfront to guests… So, the process can be improved and we know exactly what is getting sent
+Logging the notifications sent from Checkfront, from this process we can customize and build additional features
 
 */
 
 class Notification 
 {
 
-	public $host;
-	public $status;
-	public $code;
-	public $email_date;
-	public $created_date;
-	public $staff_id;
-	public $source_ip;
-	public $start_date;
-	public $end_date;
-	public $name;
-	public $email;
-	public $region;
-	public $address;
-	public $country;
-	public $postal_zip;
-
 	public $data;
 	public $dataArray;
 
 	function __construct(){  
-		$this->data = json_decode(file_get_contents('php://input'));
-    }
+		$this->raw_data = (file_get_contents('php://input'));
+		$this->data = json_decode($this->raw_data);
 
+        // Set an array with the correct timezone to unsure proper timestamp
+        $this->site = new StdClass;
+        $this->site->date = new DateTime();
+        $this->site->date->setTimezone(new DateTimeZone('GMT'));
 
-	public function ParseNotificationData() {
-		
 		$host	 		= $this->data->{'@attributes'}->host;
 		$status 		= $this->data->booking->status;
 		$code 			= $this->data->booking->code;
-		$email_date		= date('Y-m-d H:i:s');
+		$email_date		= $this->site->date->format('Y-m-d H:i:s');
 		$created_date	= $this->data->booking->created_date;
 		$staff_id		= $this->data->booking->staff_id;
 		$source_ip		= sprintf('%u', ip2long($this->data->booking->source_ip));
@@ -50,7 +36,10 @@ class Notification
 		$address		= $this->data->booking->customer->address;
 		$country		= $this->data->booking->customer->country[0];
 		$postal_zip		= $this->data->booking->customer->postal_zip;
-		
+    }
+
+    // Use this function when parsing and storing data sent via a Checkfront notification
+	public function ParseNotificationData() {
 		
 		$this->dataArray = array('host'			=> $host,
 								'status' 		=> $status, 
@@ -71,7 +60,7 @@ class Notification
 								);
 
     }
-	
+
 }
 
 ?>
