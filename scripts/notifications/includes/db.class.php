@@ -2,7 +2,7 @@
 
 /*
 
-Classes for database interaction
+Classes for database insertion
 
 */
 
@@ -16,12 +16,6 @@ class DB
 
 	public function  __construct($host, $username, $password, $db, $port = NULL)
 	{
-
-		$this->host 	= 'localhost';
-		$this->username = 'username';
-		$this->password = 'password';
-		$this->database = 'the_database';
-
 	    $this->mysqli = new mysqli($host, $username, $password, $db, $port);
 	
 	    if (mysqli_connect_errno()) {
