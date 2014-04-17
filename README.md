@@ -28,7 +28,7 @@ The Checkfront API SDK provides the following functionality:
 
 ## Installation
 
-At Checkfront to `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
+Add Checkfront to `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
 
 ```json
 {
