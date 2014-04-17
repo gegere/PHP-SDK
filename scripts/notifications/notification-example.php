@@ -29,7 +29,7 @@ require_once 'includes/notifications.class.php';
 		} else {
 
 			// Any errors? Let's review in the logs
-			error_log(print_r($notifications->dataArray, TRUE), 0);
+			error_log("Invalid Array: " . print_r($notifications->dataArray, TRUE), 0);
 
 		}
 

@@ -28,46 +28,50 @@ class Notification
     // Use this function when parsing and storing data sent via a Checkfront notification
 	public function ParseNotificationData() {
 
-		foreach ($this->data as $order) {
+		if (is_array($this->data)) {
 
-			$host	 		= $order->{'@attributes'}->host;
-			$version	 	= $order->{'@attributes'}->version;
-			$status 		= $order->booking->status;
-			$code 			= $order->booking->code;
-			$email_date		= $this->site->date->format('Y-m-d H:i:s');
-			$created_date	= date('Y-m-d H:i:s', $order->booking->created_date);
-			$staff_id		= $order->booking->staff_id;
-			$source_ip		= sprintf('%u', ip2long($order->booking->source_ip));
-			$start_date		= date('Y-m-d H:i:s', $order->booking->start_date);
-			$end_date		= date('Y-m-d H:i:s', $order->booking->end_date);
-			$name			= $order->booking->customer->name;
-			$email			= $order->booking->customer->email;
-			$region			= $order->booking->customer->region;
-			$address		= $order->booking->customer->address;
-			$country		= $order->booking->customer->country[0];
-			$postal_zip		= $order->booking->customer->postal_zip;
-			
+			foreach ($this->data as $order) {
 
-			$this->dataArray[] = array('host'		=> $host,
-									'version'		=> $version,
-									'status' 		=> $status, 
-									'code' 			=> $code,
-									'email_date' 	=> $email_date,
-									'created_date' 	=> $created_date, 
-									'staff_id' 		=> $staff_id, 
-									'source_ip' 	=> $source_ip, 
-									'start_date' 	=> $start_date,
-									'end_date' 		=> $end_date, 
-									'name' 			=> $name,
-									'email' 		=> $email, 
-									'region' 		=> $region,
-									'address' 		=> $address, 
-									'country' 		=> $country,
-									'postal_zip' 	=> $postal_zip,
-									'raw_data'		=> serialize($this->raw_data)
-									);
-		} // END foreach
+				$host	 		= $order->{'@attributes'}->host;
+				$version	 	= $order->{'@attributes'}->version;
+				$status 		= $order->booking->status;
+				$code 			= $order->booking->code;
+				$email_date		= $this->site->date->format('Y-m-d H:i:s');
+				$created_date	= date('Y-m-d H:i:s', $order->booking->created_date);
+				$staff_id		= $order->booking->staff_id;
+				$source_ip		= sprintf('%u', ip2long($order->booking->source_ip));
+				$start_date		= date('Y-m-d H:i:s', $order->booking->start_date);
+				$end_date		= date('Y-m-d H:i:s', $order->booking->end_date);
+				$name			= $order->booking->customer->name;
+				$email			= $order->booking->customer->email;
+				$region			= $order->booking->customer->region;
+				$address		= $order->booking->customer->address;
+				$country		= $order->booking->customer->country[0];
+				$postal_zip		= $order->booking->customer->postal_zip;
+				
 
+				$this->dataArray[] = array('host'		=> $host,
+										'version'		=> $version,
+										'status' 		=> $status, 
+										'code' 			=> $code,
+										'email_date' 	=> $email_date,
+										'created_date' 	=> $created_date, 
+										'staff_id' 		=> $staff_id, 
+										'source_ip' 	=> $source_ip, 
+										'start_date' 	=> $start_date,
+										'end_date' 		=> $end_date, 
+										'name' 			=> $name,
+										'email' 		=> $email, 
+										'region' 		=> $region,
+										'address' 		=> $address, 
+										'country' 		=> $country,
+										'postal_zip' 	=> $postal_zip,
+										'raw_data'		=> serialize($this->raw_data)
+										);
+			} // END foreach
+		} else {
+			error_log("Array Missing", 0);
+		}
     }
 
 }
