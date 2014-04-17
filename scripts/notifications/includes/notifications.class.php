@@ -14,8 +14,9 @@ class Notification
 
 	function __construct(){  
 		$this->raw_data = (file_get_contents('php://input'));
-		print_r($this->raw_data);
 		$this->data = json_decode($this->raw_data);
+
+
 
         // Set an array with the correct timezone to unsure proper timestamp
         $this->site = new StdClass;
@@ -34,11 +35,11 @@ class Notification
 			$status 		= $order->booking->status;
 			$code 			= $order->booking->code;
 			$email_date		= $this->site->date->format('Y-m-d H:i:s');
-			$created_date	= $order->booking->created_date;
+			$created_date	= date('Y-m-d H:i:s', $order->booking->created_date);
 			$staff_id		= $order->booking->staff_id;
-			$source_ip		= sprintf('%u', ip2long($this->data->booking->source_ip));
-			$start_date		= $order->booking->start_date;
-			$end_date		= $order->booking->end_date;
+			$source_ip		= sprintf('%u', ip2long($order->booking->source_ip));
+			$start_date		= date('Y-m-d H:i:s', $order->booking->start_date);
+			$end_date		= date('Y-m-d H:i:s', $order->booking->end_date);
 			$name			= $order->booking->customer->name;
 			$email			= $order->booking->customer->email;
 			$region			= $order->booking->customer->region;
@@ -63,7 +64,7 @@ class Notification
 									'address' 		=> $address, 
 									'country' 		=> $country,
 									'postal_zip' 	=> $postal_zip,
-									'raw_data'		=> serialize($order)
+									'raw_data'		=> serialize($this->raw_data)
 									);
 		} // END foreach
 
