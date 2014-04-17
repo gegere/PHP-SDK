@@ -8,15 +8,12 @@ Logging the notifications sent from Checkfront, from this process we can customi
 
 class Notification 
 {
-
 	public $data;
 	public $dataArray;
 
 	function __construct(){  
 		$this->raw_data = (file_get_contents('php://input'));
 		$this->data = json_decode($this->raw_data);
-
-
 
         // Set an array with the correct timezone to unsure proper timestamp
         $this->site = new StdClass;
@@ -32,42 +29,28 @@ class Notification
 
 			foreach ($this->data as $order) {
 
-				$host	 		= $order->{'@attributes'}->host;
-				$version	 	= $order->{'@attributes'}->version;
-				$status 		= $order->booking->status;
-				$code 			= $order->booking->code;
-				$email_date		= $this->site->date->format('Y-m-d H:i:s');
-				$created_date	= date('Y-m-d H:i:s', $order->booking->created_date);
-				$staff_id		= $order->booking->staff_id;
-				$source_ip		= sprintf('%u', ip2long($order->booking->source_ip));
-				$start_date		= date('Y-m-d H:i:s', $order->booking->start_date);
-				$end_date		= date('Y-m-d H:i:s', $order->booking->end_date);
-				$name			= $order->booking->customer->name;
-				$email			= $order->booking->customer->email;
-				$region			= $order->booking->customer->region;
-				$address		= $order->booking->customer->address;
-				$country		= $order->booking->customer->country[0];
-				$postal_zip		= $order->booking->customer->postal_zip;
-				
+				// key used should also be a column in the database
+				$d['host']	 		= $order->{'@attributes'}->host;
+				$d['version']	 	= $order->{'@attributes'}->version;
+				$d['status'] 		= $order->booking->status;
+				$d['code'] 			= $order->booking->code;
+				$d['email_date']	= $this->site->date->format('Y-m-d H:i:s');
+				$d['created_date']	= date('Y-m-d H:i:s', $order->booking->created_date);
+				$d['staff_id']		= $order->booking->staff_id;
+				$d['source_ip']		= sprintf('%u', ip2long($order->booking->source_ip));
+				$d['start_date']	= date('Y-m-d H:i:s', $order->booking->start_date);
+				$d['end_date']		= date('Y-m-d H:i:s', $order->booking->end_date);
+				$d['name']			= $order->booking->customer->name;
+				$d['email']			= $order->booking->customer->email;
+				$d['region']		= $order->booking->customer->region;
+				$d['address']		= $order->booking->customer->address;
+				$d['country']		= $order->booking->customer->country;
+				$d['postal_zip']	= $order->booking->customer->postal_zip;
+				$d['raw_data'] 		= serialize($this->raw_data);
 
-				$this->dataArray[] = array('host'		=> $host,
-										'version'		=> $version,
-										'status' 		=> $status, 
-										'code' 			=> $code,
-										'email_date' 	=> $email_date,
-										'created_date' 	=> $created_date, 
-										'staff_id' 		=> $staff_id, 
-										'source_ip' 	=> $source_ip, 
-										'start_date' 	=> $start_date,
-										'end_date' 		=> $end_date, 
-										'name' 			=> $name,
-										'email' 		=> $email, 
-										'region' 		=> $region,
-										'address' 		=> $address, 
-										'country' 		=> $country,
-										'postal_zip' 	=> $postal_zip,
-										'raw_data'		=> serialize($this->raw_data)
-										);
+				$a = array_filter( $d, 'strlen' );
+				$this->dataArray[] = $a;
+
 			} // END foreach
 		} else {
 			error_log("Array Missing", 0);
