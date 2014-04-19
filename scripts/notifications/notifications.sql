@@ -23,7 +23,7 @@ CREATE TABLE `notifications` (
   `address` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   `postal_zip` varchar(255) NOT NULL,
-  `raw_data` longtext NOT NULL,
+  `raw_data` mediumtext NOT NULL,
   PRIMARY KEY (`notification_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
