@@ -20,9 +20,9 @@
  */
 
 ini_set('session.hash_bits_per_character', 5);
-include('../../lib/CheckfrontAPI.php');
+include('../../lib/Checkfront.php');
 
-class Checkfront extends CheckfrontAPI {
+class CheckfrontAPI extends Checkfront {
 
 	public $tmp_file = '.checkfront_oauth';
 
