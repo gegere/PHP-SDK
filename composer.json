@@ -1,6 +1,10 @@
 {
-    "homepage" : "https://github.com/gegere/PHP-SDK",
+    "name" : "checkfront/checkfront",
+    "description" : "Wrapper library for using the Checkfront API",
+    "version": "3.0.0",
+    "homepage" : "https://github.com/htmlgraphic/PHP-SDK",
     "license" : "MIT",
+    "keywords": ["checkfront", "bookings", "travel", "check", "front"],
     "authors" : [
         {
             "name" : "Jason Gegere",
@@ -8,27 +12,12 @@
             "homepage" : "http://htmlgraphic.com"
         }
     ],
-    "repositories": {
-        "checkfront-unofficial": {
-            "type": "package",
-            "package": {
-                "name": "Checkfront/PHP-SDK",
-                "version": "3.0",
-                "source": {
-                    "url": "https://github.com/gegere/PHP-SDK.git",
-                    "type": "git",
-                    "reference": "origin/master"
-                    }
-                }
-            }
-    },
-    "minimum-stability" : "dev",
     "require": {
-        "Checkfront/PHP-SDK": "3.0.*"
+        "php": ">=5.3"
         },
     "autoload": {
         "psr-0": {
-            "Checkfront": "vendor/Checkfront/PHP-SDK/lib"
+            "Checkfront": "lib/"
             }
         }
 }
