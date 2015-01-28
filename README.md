@@ -25,7 +25,7 @@ If you are not using [Composer](http://getcomposer.org), you should be. It's an 
 Setup composer with the needed code:
 
 ```
-$ composer init --require=checkfront/checkfront:dev-master -n 
+$ composer init --require="checkfront/checkfront:3.0.*" -n 
 $ composer install
 ```
 Now the needed code should be available within your project.
@@ -65,4 +65,3 @@ $Checkfront = new Checkfront(
     }
 ?>
 ```
-
