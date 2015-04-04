@@ -1,6 +1,6 @@
 <?php
-require_once 'vendor/checkfront/checkfront/scripts/notifications/includes/db.class.php';
-require_once 'vendor/checkfront/checkfront/scripts/notifications/includes/notifications.class.php';
+require_once 'includes/db.class.php';
+require_once 'includes/notifications.class.php';
 
 
 ## COMMENTED CODE IS USED TO WRITE TO A FILE, GOOD FOR DEBUGGING
