@@ -379,6 +379,27 @@ class Checkfront {
     }
 
 
+    function _array_to_obj($array, &$obj)
+    {
+        foreach ($array as $key => $value)
+        {
+            if (is_array($value)) {
+                $obj->$key = new stdClass();
+                $this->_array_to_obj($value, $obj->$key);
+            } else {
+                $obj->$key = $value;
+            }
+        }
+        return $obj;
+    }
+
+    function arrayToObject($array)
+    {
+        $object= new stdClass();
+        return $this->_array_to_obj($array,$object);
+    }
+
+
     /**
      * API GET request
      *
@@ -390,7 +411,7 @@ class Checkfront {
     final public function get($path, $data=array()) {
         if($data) $path .= '/?'  . http_build_query($data);
         if($response = $this->api($path)) {
-            return $response;
+            return $this->arrayToObject($response);
         } else {
             return false;
         }
