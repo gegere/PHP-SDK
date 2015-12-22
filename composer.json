@@ -1,7 +1,7 @@
 {
     "name" : "checkfront/checkfront",
     "description" : "Wrapper library for using the Checkfront API",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "homepage" : "https://github.com/htmlgraphic/PHP-SDK",
     "license" : "MIT",
     "keywords": ["checkfront", "bookings", "travel", "check", "front"],
