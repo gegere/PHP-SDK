@@ -79,20 +79,48 @@ $Checkfront = new Checkfront(
 
 #### Token Access
 
+##### OAuth2 Access
+
+```php
+<?
+$Checkfront = new Checkfront(
+    array(
+        'host'=>'your-company.checkfront.com',
+        'consumer_key'  => '5010076404ec1809470508',
+        'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
+        'redirect_uri'=>'oob',
+    )
+);
+?>
+```
+
+##### Token Access
+
 ```php
 <?php
 $Checkfront = new Checkfront(
+<<<<<<< HEAD
 	array(
 		'host'=>'your-company.checkfront.com',
 		'auth_type' => 'token',
 		'api_key'  => '5010076404ec1809470508',
 		'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
 	));
+=======
+    array(
+        'host'=>'your-company.checkfront.com',
+	'auth_type' => 'token',
+        'api_key'  => '5010076404ec1809470508',
+        'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
+    )
+);
+>>>>>>> 04fe00c... Update README.md
 ?>
 ```
 
 #### PHP Examples
 ```php
+<<<<<<< HEAD
 <?php
 // Get items rates and availbility
 $items = $Checkfront->get('item',array(
@@ -110,6 +138,14 @@ public function query_booking()
 }
 
 print_r(query_booking() );
+=======
+<?
+/* Get items rates and availbility*/
+$Checkfront->get('item',array(
+    'start_date'=>date('Y-m-d'),
+    'end_date'=>date('Y-m-d',strtotime('+3 days'))
+));
+>>>>>>> 04fe00c... Update README.md
 ?>
 ```
 
