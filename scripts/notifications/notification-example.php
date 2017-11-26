@@ -3,8 +3,7 @@ require_once 'includes/db.class.php';
 require_once 'includes/notifications.class.php';
 
 
-## COMMENTED CODE IS USED TO WRITE TO A FILE, GOOD FOR DEBUGGING
-
+## TEST WRITING TO A FILE - DEBUGGING
 #$fh = fopen('json_parse.log', 'a+') or die("Error opening output file");
 
 #if ( $fh ) {
@@ -19,7 +18,7 @@ require_once 'includes/notifications.class.php';
 
 		if (is_array($notifications->dataArray))
 		{
-			foreach ( $notifications->dataArray as $data ) 
+			foreach ( $notifications->dataArray as $data )
 			{
 				// key used should also be a column in the database
 				// need additional data simply add it
@@ -44,23 +43,21 @@ require_once 'includes/notifications.class.php';
 				$a = array_filter( $d, 'strlen' ); // this will remove emtpy object from causing database insertion issues
 				$db->insert('notifications', $a);
 			}
-			
+
 			echo "Ok";
-
-		} else {
-
+		}
+		else
+		{
 			// Any errors? Let's review in the logs
 			error_log("Invalid Array: " . print_r($notifications->dataArray, TRUE), 0);
-
 		}
-
 
 #	    fwrite($fh, serialize($notifications->dataArray));
 #	    fclose($fh);
-		
-	} else {
+
+	}
+	else
+	{
 		error_log("Invalid Host", 0);
 	}
 #}
-
-?>
