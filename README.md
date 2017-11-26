@@ -1,67 +1,76 @@
-[![Build Status](https://travis-ci.org/htmlgraphic/PHP-SDK.svg?branch=feature/travis-ci)](https://travis-ci.org/htmlgraphic/PHP-SDK)
+Checkfront PHP SDK (v3.0)
+==========================
 
-# Checkfront PHP SDK (v3.0)
+The [Checkfront Booking API](http://www.checkfront.com/developers/api/) allows you 
+to build integrations and custom applications that interact with a remote Checkfront account.
 
-The [Checkfront API](http://api.checkfront.com/en/latest/) allows you 
-to build integrations and custom applications that interact with the Checkfront service. 
+This repository contains the open source PHP SDK that allows you to utilize the
+above on your website. Except as otherwise noted, the Checkfront PHP SDK
+is licensed under the Apache Licence, Version 2.0
+(http://www.apache.org/licenses/LICENSE-2.0.html)
 
-##Features
+Updates
+-------
+
+* The 'Cart' example has been given a few quick fixes for v3 API support, using token pair auth.
+* The CheckfrontAPI library now supports connecting to the v3 API, as well as features like token pair authentication
+* New/updated examples are in the works.
+* See our v3 API documentation for more information.
+
+
+Features
+--------
 
 The Checkfront API SDK provides the following functionality:
 
-* OAuth 2.0 authorization and authentication.
-* OAuth 2.0 token refresh.
+* OAuth2 authorization and authentication.
+* OAuth2 token refresh.
 * Token pair authorization.
 * Session handing.
 * Access to Checkfront Objects via GET, POST, PUT and DELETE request.
 
+Usage
+-----
 
-## Installation
+The examples are a good place to start. The minimal you'll need to
+have is:
 
-This repo is setup to extend off of the library created by Checkfront. To easily add or **update** this library, a Composer.json file has been created. 
-
-If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. Offically Checkfront does not have a registered Composer library, no problem it can be setup via the following code:
-
-Setup composer with the needed code:
-
-```
-$ composer init --require="checkfront/checkfront:3.0.*" -n 
-$ composer install
-```
-Now the needed code should be available within your project.
-
-
-Next, at the top of your PHP script require the autoloader:
-
-```bash
-require 'vendor/autoload.php';
-```
-
-
-## Usage
-
-The examples are a good place to start, there are several in the `examples` folder. The minimal you'll need to have is:
+##### OAuth2 Access
 
 ```php
-<?php
+<?
 $Checkfront = new Checkfront(
     array(
         'host'=>'your-company.checkfront.com',
-        'auth_type' => 'token',
-        'consumer_key'  => 'CHANGE_ME',
-        'consumer_secret' => 'CHANGE_ME',
-        'account_id' => 'off',
+        'consumer_key'  => '5010076404ec1809470508',
+        'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
+        'redirect_uri'=>'oob',
+    )
+);
+?>
+```
+
+##### Token Access
+
+```php
+<?
+$Checkfront = new Checkfront(
+    array(
+        'host'=>'your-company.checkfront.com',
+	'auth_type' => 'token',
+        'api_key'  => '5010076404ec1809470508',
+        'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
     )
 );
 ?>
 ```
 
 ```php
-<?php
-    // fetch all bookings
-    public function query_booking($booking_id) {
-        $response = $this->Checkfront->get('booking/index');
-        return $response;
-    }
+<?
+/* Get items rates and availbility*/
+$Checkfront->get('item',array(
+    'start_date'=>date('Y-m-d'),
+    'end_date'=>date('Y-m-d',strtotime('+3 days'))
+));
 ?>
 ```
