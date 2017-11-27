@@ -3,14 +3,12 @@
  * Checkfront Sample Code: Browse inventory & create booking.
  *
  * This is sample code is for demonstration only and should not be used in production
- * without modifcation.  It does not adequtly secure your OAuth tokens.
+ * without modifcation. It does not adequtly secure your OAuth tokens.
  *
- * see: 
- * 
- * API Documenation:  http://www.checkfront.com/developers/api/
- * API Error Codes:  http://www.checkfront.com/developers/api-error
- * PHP SDK - https://github.com/Checkfront/PHP-SDK
- * CQL Documenation: http://www.checkfront.com/developers/api-cql/
+ * see:
+ *
+ * API Documenation:  http://api.checkfront.com/
+ * PHP SDK - https://github.com/htmlgraphic/Checkfront-PHP-SDK
  *
  */
 
@@ -18,7 +16,6 @@
  * @access public
  * @package Checkfront
  */
-
 ini_set('session.hash_bits_per_character', 5);
 include('../../lib/Checkfront.php');
 
@@ -30,12 +27,12 @@ class CheckfrontAPI extends Checkfront {
 		parent::__construct($data,session_id());
 	}
 
-	/* DUMMY Data store.  This sample stores oauth tokens in a text file...
-	 * This is NOT reccomened in production.  Ideally, this would be in an encryped 
-	 * database or other secure source.  Never expose the client_secret or access / refresh
+	/* DUMMY Data store. This sample stores oauth tokens in a text file...
+	 * This is NOT reccomened in production. Ideally, this would be in an encryped
+	 * database or other secure source. Never expose the client_secret or access / refresh
 	 * tokens.
 	 *
-	 * store() is called from the parent::CheckfrontAPI when fetching or setting access tokens.  
+	 * store() is called from the parent::Checkfront when fetching or setting access tokens.
 	 *
 	 * When an array is passed, the store should save and return the access tokens.
 	 * When no array is passed, it should fetch and return the stored access tokens.
@@ -54,44 +51,40 @@ class CheckfrontAPI extends Checkfront {
 	}
 
 	public function session($session_id,$data=array()) {
-		session_id($session_id);
-		if(!empty($data)) $_SESSION = $data;
+	       session_id($session_id);
+	       if(!empty($data)) $_SESSION = $data;
 	}
 }
 
-/* 
- * You need to create a new application in your Checkfront Account under
-Manage / Extend / Api and supply the details below. 
+/*
+	You need to create a new application in your Checkfront Account under
+	Manage / Developer / Api and supply the details below.
 
-This example bybasses the oauth authorization redirect by supplying "oob" 
-(Out Of Bounds) as the redirect_uri, and by generating the access and 
-refresh tokens from within Checkfront. 
+	This example bybasses the oauth authorization redirect by supplying "oob"
+	(Out Of Bounds) as the redirect_uri, and by generating the access and
+	refresh tokens from within Checkfront.
 
-For more infomration on your endpoints see: 
-http://www.checkfront.com/developers/api/#endpoints
+	For more infomration on your endpoints see:
+	http://api.checkfront.com/ref/index.html
 */
 
 // a general class that wraps the api along with some custom calls
 class Booking {
-
 	public $cart = array();
-	public $session = array();
 
 	function __construct() {
 		// apply a session_id to the request if one is specified
-		if (!empty($_GET['cart_id'])) session_id($_GET['cart_id']);
+		if (!empty($_GET['cart_id'])) { session_id($_GET['cart_id']); }
 		session_start();
+
 		// create api connection to Checkfront
-		// you can generate a token pair under Manage / Developer in your account
-		$this->Checkfront = new Checkfront(
+		$this->Checkfront = new CheckfrontAPI(
 			array(
-				'host' => 'your-company.checkfront.com',
-				'auth_type' => 'token',
-				'api_key' => '',
-				'api_secret' => '',
-				'account_id' => 'off',
-			)
-		);
+				'host'        => getenv('HOST'),
+				'api_key'     => getenv('CONSUMER_KEY'),
+				'api_secret'  => getenv('CONSUMER_SECRET'),
+				'auth_type'   => 'token'
+			));
 
 		// init shopping cart
 		$this->cart();
@@ -118,16 +111,14 @@ class Booking {
 
 	// get cart session
 	public function cart() {
-		if(!empty($_SESSION)) {
-			$response = $this->Checkfront->get('booking/session');
-			if(!empty($response['booking']['session']['item'])) {
-				foreach($response['booking']['session']['item']  as $line_id => $data) {
-					// store for later
-					$this->cart[$line_id] = $data;
-				}
+		$response = $this->Checkfront->get('booking/session');
+		if(!empty($response['booking']['session']['item'])) {
+			foreach($response['booking']['session']['item']  as $line_id => $data) {
+				// store for later
+				$this->cart[$line_id] = $data;
 			}
-			$this->Checkfront->set_session($response['booking']['session']['id'], $response['booking']['session']);
 		}
+		$this->Checkfront->set_session($response['booking']['session']['id'], $response['booking']['session']);
 	}
 
 	// create a booking using the session and the posted form fields
@@ -142,5 +133,5 @@ class Booking {
 	public function clear() {
 		$response = $this->Checkfront->get('booking/session/clear');
 		session_destroy();
-	}	
+	}
 }

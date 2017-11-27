@@ -10,7 +10,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$response = $Booking->create($_POST);
 
 	if($response['request']['status'] == 'OK') {
-		// successful transactions will return a url to be redirected to for payment or an invoice.
+		// Successful transactions will return a url redirected to
+		// for payment or an invoice. Update to a public URL to view receipt.
 		header("Location: {$response['request']['data']['url']}");
 		exit;
 
@@ -32,7 +33,7 @@ input, select, textarea { width: 20em; display: block; }
 </style>
 </head>
 <body>
-<h1>Checkfront Shopping Cart Demo</h1>
+<h1>Reservations Booking Demo</h1>
 <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
 <fieldset>
 <?php

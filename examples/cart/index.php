@@ -28,8 +28,8 @@ $date = (isset($_GET['date'])) ? date('Y-m-d',strtotime($_GET['date'])) : date('
 <style style="text/css">body { font:90% "Helvetica Neue",Helvetica,Arial,sans-serif; }</style>
 </head>
 <body>
-<h1>Checkfront Shopping Cart Demo</h1>
-<p>This is a bare bones example of how to query inventory items from the Checkfront API, add them to a booking session, and create a new booking.  This is a shopping cart style demo that allows you to add and remove multiple items to a booking before proceeding.</p>
+<h1>Reservations Booking Demo</h1>
+<p>This is a bare bones example of how to query inventory items from the Checkfront API, add them to a booking session, and create a new booking. This is a shopping cart style demo that allows you to add and remove multiple items to a booking before proceeding.</p>
 <!-- it may be preferred to set this in your local session -->
 <div style="width: 500px; float: left;">
 <h3>Available Items</h3>
@@ -44,8 +44,7 @@ $items = $Booking->query_inventory(
 		'end_date'=>$date,
 		// change these booking parameters to suit your setup:
 		'param'=>array( 'guests' => 1 )
-	)
-);
+	));
 
 if(count($items)) {
 	$c = 0;
@@ -58,7 +57,7 @@ if(count($items)) {
 		echo "&nbsp; <small style='color: #999;'>SLIP: {$item['rate']['slip']}</small><br />";
 		echo '</li>';
 		// Let's only show 5 for the sake of the demo;
-		if($c++ == 5) break;
+		if($c++ == 20) break;
 	}
 }
 ?>
@@ -76,15 +75,17 @@ if(count($Booking->cart)) {
 	foreach($Booking->cart as $line_id => $item) {
 		echo "<li style='padding: 5px'><strong>{$item['name']}</strong> ({$item['rate']['qty']})<br />";
 		echo $item['rate']['total'];
-		if($item['date']['summary']) echo '<br /><span style="font-size: .9em; color: #444">' . $item['date']['summary'] . '</span>';
+		if($item['date']['summary']) {
+			echo '<br /><span style="font-size: .9em; color: #444">' . $item['date']['summary'] . '</span>';
+		}
 		echo "</li>";
 	}
-	echo "<li><span style='font-family:monospace;font-size: .9em; color: #333'>Sub-total: {$_SESSION['sub_total']}<br/>";	
+	echo "<li><span style='font-family:monospace;font-size: .9em; color: #333'>Sub-total: {$_SESSION['sub_total']}<br/>";
 	echo "Tax: {$_SESSION['tax_total']}<br/>";
 	echo "Total: {$_SESSION['total']}</span></li>";
 	echo '<li><input type="submit" name="create" value=" Book Now " /></li>';
 	echo '<li><input type="button" name="cancel" value=" Clear All " onClick="window.location=\'' . $_SERVER['SCRIPT_NAME'] . '?reset=1\';" /></li>';
-	
+
 } else {
 	echo '<p>EMPTY</p>';
 }

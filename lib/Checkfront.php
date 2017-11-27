@@ -50,7 +50,7 @@ class Checkfront {
 	public $error = array();
 	private $api_timeout = '30';
 
-	// change to the name of your app / integration (shows in log and invoice footer).  maxlength=15
+	// change to the name of your app / integration (shows in log and invoice footer). maxlength=15
 	private $app_id = 'API';
 
 	// checkfront host
@@ -76,13 +76,13 @@ class Checkfront {
 	private $account_id;
 
 
-	// over-ride the ip address of the API call.  Set this if you wish to track
+	// over-ride the ip address of the API call. Set this if you wish to track
 	// another API when creating or updating a booking.
 	private $client_ip;
 	private $session_id;
 
 
-	// use to store API keys, ideally via an extended class.  Not used for token pair auth
+	// use to store API keys, ideally via an extended class. Not used for token pair auth
 	protected function store($data=array()) {
 	}
 
