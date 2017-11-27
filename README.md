@@ -8,10 +8,9 @@ The [Checkfront Booking API](http://www.checkfront.com/developers/api/) allows y
 This repository contains the open source PHP SDK and various example scripts. Except as otherwise noted, the Checkfront PHP SDK is licensed under the Apache Licence, Version 2.0
 (http://www.apache.org/licenses/LICENSE-2.0.html)
 
-
+---
 
 ## Features
----
 
 The Checkfront API SDK provides the following functionality:
 
@@ -25,7 +24,6 @@ The Checkfront API SDK provides the following functionality:
 
 
 ## Installation & Usage
----
 
 This repo is setup to extend off of the library created by Checkfront. To update this library, a Composer.json file has been created. 
 
@@ -35,31 +33,34 @@ If you are not using [Composer](http://getcomposer.org), you should be. It's an 
 
 Let's install Checkfront-PHP-DK via the following few commands:
 
->	Type `composer` for more options:
+>   Type `composer` for more options:
 
 ```
 $ composer init --require="checkfront/checkfront:3.0.*" -n 
 $ composer install
 ```
 
-
-Now the needed code should be available within your project. At the top of your PHP script require the autoloader, if you are using a MVC such as CodeIgnitor or Laravel review their autoload guides. Obtain API credintials [https://{your-company}.checkfront.com/manage/developer/](https://{your-company}.checkfront.com/manage/developer/)
-
 ```bash
 require 'vendor/autoload.php';
 ```
+Now the needed code should be available within your project. At the top of your PHP script require the autoloader, if you are using a MVC such as CodeIgnitor or Laravel review their autoload guides. 
+Obtain API credintials [https://{your-company}.checkfront.com/manage/developer/](https://{your-company}.checkfront.com/manage/developer/)
+
+
+
+---
 
 > The repo example files are a good place to start. 
 
 ```shell
 PHP-SDK                         # → Root of Service
-└── examples/                     		  
+└── examples/
    └── cart
-    	├── Cart.php 			# → Main wrapper class, ADD API KEY
-    	├── create.php   		# → Process $_POST request, add to cart session
-    	├── Form.php  			# → Various PHP functions
-    	├── index.php 			# → Default view, list avaiable inventory
-    	└── README.md 			# → File overview
+	   ├── Cart.php         # → Main wrapper class, ADD API KEY
+	   ├── create.php       # → Process $_POST request, add to cart session
+	   ├── Form.php         # → Various PHP functions
+	   ├── index.php        # → Default view, list available inventory
+	   └── README.md        # → File overview & tips
 ```
 
 #### OAuth2 Access
@@ -67,12 +68,12 @@ PHP-SDK                         # → Root of Service
 ```php
 <?php
 $Checkfront = new Checkfront(
-    array(
-        'host' => 'your-company.checkfront.com',
-        'consumer_key' => '5010076404ec1809470508',
-        'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
-        'redirect_uri' => 'oob',
-    ));
+	array(
+		'host' => 'your-company.checkfront.com',
+		'consumer_key' => '5010076404ec1809470508',
+		'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
+		'redirect_uri' => 'oob',
+	));
 ?>
 ```
 
@@ -81,31 +82,31 @@ $Checkfront = new Checkfront(
 ```php
 <?php
 $Checkfront = new Checkfront(
-    array(
-        'host'=>'your-company.checkfront.com',
-	    'auth_type' => 'token',
-        'api_key'  => '5010076404ec1809470508',
-        'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
-    ));
+	array(
+		'host'=>'your-company.checkfront.com',
+		'auth_type' => 'token',
+		'api_key'  => '5010076404ec1809470508',
+		'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
+	));
 ?>
 ```
 
-### PHP Examples
+#### PHP Examples
 ```php
 <?php
 // Get items rates and availbility
 $items = $Checkfront->get('item',array(
-    'start_date'=>date('Y-m-d'),
-    'end_date'=>date('Y-m-d',strtotime('+3 days'))
-));
+			'start_date'=>date('Y-m-d'),
+			'end_date'=>date('Y-m-d',strtotime('+3 days'))
+		));
 
 print_r( $items );
 
 // fetch all bookings
 public function query_booking() 
 {
-    $response = $this->Checkfront->get('booking/index');
-    return $response;
+	$response = $this->Checkfront->get('booking/index');
+	return $response;
 }
 
 print_r(query_booking() );
@@ -134,12 +135,23 @@ Move the following example file `notifications-example.php` to a place of your c
 ### Notification Service Breakdown
 
 ```shell
-PHP-SDK                                  # → Root of Service
-└── scripts/                     		  
+PHP-SDK                                 # → Root of Service
+└── scripts/
    └── notifications
-    	├── includes
-    	│ 	├── db.class.php   		     # → DB Interface Class 
-    	│ 	└── notifications.class.php  # → Parse of incoming data
-    	├── notifications-example.php 	 # → Processing Example file
- 	  	└── notifications.sql   		 # → DB Example File
+	   ├── includes
+	   │   ├── db.class.php             # → DB Interface Class 
+	   │   └── notifications.class.php  # → Parse of incoming data
+	   ├── notifications-example.php    # → Processing Example file
+	   └── notifications.sql            # → DB Example File
 ```
+
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your own code if necessary (`phpunit`)
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
