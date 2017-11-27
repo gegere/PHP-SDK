@@ -1,4 +1,4 @@
-Sample Booking Cart
+Sample Reservation System
 ==========================
 
 The Booking Cart demo is a bare bones shopping card style booking page.  It is not intended 
@@ -14,8 +14,10 @@ allows you to add multiple items to your session.
 
 API calls:
 
+```
 booking/session
 item
+```
 
 create.php
 ----------
@@ -43,4 +45,4 @@ The form class is an optional helper class that renders the form fields into htm
 Cart.php
 --------
 
-Main wrapper class that encapsulates the Checkfront API and extends some custom calls. 
+Main wrapper class that encapsulates the Checkfront API and extends some custom calls. Add API Key & API Secret to this file.
