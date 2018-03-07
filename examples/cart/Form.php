@@ -17,6 +17,7 @@ class Form {
 		'p'=>1,
 		'select'=>1,
 		'textarea'=>1,
+		'radio'=>1,
 		'filter_radio'=>1,
 		'checkbox'=>1,
 	);
@@ -61,6 +62,11 @@ class Form {
 			return $this->{$try}($field_id,$field);
 		}
 
+	}
+
+	private function build_radio($id,$data){
+		$html = $this->build_filter_radio_group($data['define']['layout']['options'],$id,$data['value']);
+		return $html;
 	}
 
 	private function build_text($id,$data) {
