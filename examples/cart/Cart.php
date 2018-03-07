@@ -132,7 +132,6 @@ class Booking {
 
 	// create a booking using the session and the posted form fields
 	public function create($form) {
-		$form['session_id'] = session_id();
 		if($response = $this->Checkfront->post('booking/create',array('form'=>$form))) {
 			return $response;
 		}
