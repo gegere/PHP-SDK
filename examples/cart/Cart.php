@@ -7,10 +7,9 @@
  *
  * see: 
  * 
- * API Documenation:  http://www.checkfront.com/developers/api/
- * API Error Codes:  http://www.checkfront.com/developers/api-error
- * PHP SDK - https://github.com/Checkfront/PHP-SDK
- * CQL Documenation: http://www.checkfront.com/developers/api-cql/
+ * API Documenation:  http:/api.checkfront.com
+ * API Error Codes:   http://api.checkfront.com/guide/faq.html#understanding-errors
+ * PHP SDK:           https://github.com/Checkfront/PHP-SDK
  *
  */
 
