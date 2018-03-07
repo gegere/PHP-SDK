@@ -5,7 +5,7 @@
  * @author     Checkfront Inc <info@checkfront.com>
  * @category   HTML
  * @package    Form
- * @copyright  2008-2012 Checkfront Inc
+ * @copyright  2008-2018 Checkfront Inc
 */
 class Form {
 
