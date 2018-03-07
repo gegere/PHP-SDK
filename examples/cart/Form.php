@@ -17,7 +17,8 @@ class Form {
 		'p'=>1,
 		'select'=>1,
 		'textarea'=>1,
-		'radio'=>1,
+		'filter_radio'=>1,
+		'checkbox'=>1,
 	);
 
 	function __construct($data=array(),$values=array()) {
@@ -79,12 +80,24 @@ class Form {
 	}
 
 	private function build_select($id,$data) {
-		$html ="<select name='{$id}' id='{$id}'>" . $this->build_select_options($data['define']['layout']['options'],$data['value'],!empty($data['define']['layout']['single'])) . "</select></li>";
+		// TODO: Query booking/form?form[customer_country]={value} for these options
+		if($id === "customer_region"){
+			$html = "<input name='{$id}' id='{$id}' placeholder='BC'></input>";
+		} else {
+			$html = "<select name='{$id}' id='{$id}'>" . 
+			$this->build_select_options(
+				$data['define']['layout']['options'],
+				$data['value'],
+				!empty(
+					$data['define']['layout']['single']
+				)
+			) . "</select></li>";
+		}
 		return $html;
 	}
 
-	private function build_radio($id,$data) {
-		$html = $this->build_radio_group($data['define']['layout']['options'],$id,$data['value']);
+	private function build_filter_radio($id,$data) {
+		$html = $this->build_filter_radio_group($data['define']['layout']['options'],$id,$data['value']);
 		return $html;
 	}
 
@@ -100,7 +113,7 @@ class Form {
 		return $html;
 	}
 
-	private function build_radio_group($data,$id,$sel) {
+	private function build_filter_radio_group($data,$id,$sel) {
 		if(!is_array($data)) return false;
 		$html = '';
 		foreach($data as $key => $val) {
