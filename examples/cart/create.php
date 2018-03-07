@@ -28,6 +28,8 @@ header('Content-type: text/html; charset=utf-8');
     body { font:90% "Helvetica Neue",Helvetica,Arial,sans-serif; }
     label { width: 10em; display: block; text-align: right; font-weight: bold; float: left; margin-right: 1em; }
     input, select, textarea { width: 20em; display: block; }
+		label[type="radio"] { display: inline-block; float: none; width: 2em; }
+		input[type="radio"] { display: inline-block; width: 1em; margin-right: 5em; }
     .msg.ERROR { color: firebrick; font-weight: bold; }
     i.required { color: orange;  margin: 0 -7px 0 2px; }
     #debug-info { background: #eee; width: 30%; padding: 1em; margin: 1em; box-shadow: inset 0px 0px 3px 0px #333; }
