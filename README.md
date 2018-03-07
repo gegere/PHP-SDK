@@ -32,8 +32,7 @@ The Checkfront API SDK provides the following functionality:
 Usage
 -----
 
-The examples are a good place to start. The minimal you'll need to
-have is:
+The examples are a good place to start. The minimal you'll need to have is:
 
 ##### OAuth2 Access
 
@@ -41,10 +40,10 @@ have is:
 <?
 $Checkfront = new Checkfront(
     array(
-        'host'=>'your-company.checkfront.com',
-        'consumer_key'  => '5010076404ec1809470508',
+        'host' => 'your-company.checkfront.com',
+        'consumer_key' => '5010076404ec1809470508',
         'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
-        'redirect_uri'=>'oob',
+        'redirect_uri' => 'oob',
     )
 );
 ?>
@@ -56,9 +55,9 @@ $Checkfront = new Checkfront(
 <?
 $Checkfront = new Checkfront(
     array(
-        'host'=>'your-company.checkfront.com',
-	'auth_type' => 'token',
-        'api_key'  => '5010076404ec1809470508',
+        'host' => 'your-company.checkfront.com',
+        'auth_type' => 'token',
+        'api_key' => '5010076404ec1809470508',
         'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
     )
 );
@@ -68,9 +67,11 @@ $Checkfront = new Checkfront(
 ```php
 <?
 /* Get items rates and availbility*/
-$Checkfront->get('item',array(
-    'start_date'=>date('Y-m-d'),
-    'end_date'=>date('Y-m-d',strtotime('+3 days'))
-));
+$Checkfront->get('item',
+    array(
+        'start_date' => date('Y-m-d'),
+        'end_date' => date('Y-m-d', strtotime('+3 days')),
+    )
+);
 ?>
 ```

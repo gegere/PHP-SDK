@@ -7,10 +7,9 @@
  *
  * see: 
  * 
- * API Documenation:  http://www.checkfront.com/developers/api/
- * API Error Codes:  http://www.checkfront.com/developers/api-error
- * PHP SDK - https://github.com/Checkfront/PHP-SDK
- * CQL Documenation: http://www.checkfront.com/developers/api-cql/
+ * API Documenation:  http:/api.checkfront.com
+ * API Error Codes:   http://api.checkfront.com/guide/faq.html#understanding-errors
+ * PHP SDK:           https://github.com/Checkfront/PHP-SDK
  *
  */
 
@@ -132,7 +131,6 @@ class Booking {
 
 	// create a booking using the session and the posted form fields
 	public function create($form) {
-		$form['session_id'] = session_id();
 		if($response = $this->Checkfront->post('booking/create',array('form'=>$form))) {
 			return $response;
 		}
