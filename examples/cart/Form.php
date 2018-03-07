@@ -115,15 +115,17 @@ class Form {
 
 	private function build_filter_radio_group($data,$id,$sel) {
 		if(!is_array($data)) return false;
-		$html = '';
+		$html = "<div class='radio-filter-group'>";
 		foreach($data as $key => $val) {
-			$html .= "<input type='radio' name='{$id}' value='" . $this->escape($val) . "'";
+			$html .= "<label type='radio' for={$id}_{$val}>{$val}:</label>";
+			$html .= "<input type='radio' name='{$id}' id='{$id}_{$val}' value='" . $this->escape($val) . "'";
 			if($sel === $key) {
 				$html .= " selected='selected'";
 			}
 
-			$html .= '/>' . $val . ' ';
+			$html .= '/>';
 		}
+		$html .= '</div>';
 		return $html;
 	}
 
