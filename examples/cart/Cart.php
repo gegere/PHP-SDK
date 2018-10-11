@@ -7,7 +7,8 @@
  *
  * see:
  *
- * API Documenation:  http://api.checkfront.com/
+ * API Documenation:  http:/api.checkfront.com
+ * API Error Codes:   http://api.checkfront.com/guide/faq.html#understanding-errors
  * PHP SDK - https://github.com/htmlgraphic/Checkfront-PHP-SDK
  *
  */
@@ -32,7 +33,7 @@ class CheckfrontAPI extends Checkfront {
 	 * database or other secure source. Never expose the client_secret or access / refresh
 	 * tokens.
 	 *
-	 * store() is called from the parent::Checkfront when fetching or setting access tokens.
+	 * store() is called from the parent::CheckfrontAPI when fetching or setting access tokens.
 	 *
 	 * When an array is passed, the store should save and return the access tokens.
 	 * When no array is passed, it should fetch and return the stored access tokens.
@@ -51,8 +52,8 @@ class CheckfrontAPI extends Checkfront {
 	}
 
 	public function session($session_id,$data=array()) {
-	       session_id($session_id);
-	       if(!empty($data)) $_SESSION = $data;
+		session_id($session_id);
+		if(!empty($data)) $_SESSION = $data;
 	}
 }
 
@@ -76,14 +77,15 @@ class Booking {
 		// apply a session_id to the request if one is specified
 		if (!empty($_GET['cart_id'])) { session_id($_GET['cart_id']); }
 		session_start();
-
 		// create api connection to Checkfront
+		// generate a token pair under Manage / Developer via your account
 		$this->Checkfront = new CheckfrontAPI(
 			array(
 				'host'        => getenv('HOST'),
 				'api_key'     => getenv('CONSUMER_KEY'),
 				'api_secret'  => getenv('CONSUMER_SECRET'),
-				'auth_type'   => 'token'
+				'auth_type'   => 'token',
+				'account_id' => 'off',
 			));
 
 		// init shopping cart
@@ -92,13 +94,13 @@ class Booking {
 
 	// fetch items from inventory based on date
 	public function query_inventory($data) {
-		$response = $this->Checkfront->get('item',array('start_date'=>$data['start_date'],'end_date'=>$data['end_date']));
+		$response = $this->Checkfront->get('item', array('start_date'=>$data['start_date'],'end_date'=>$data['end_date']));
 		return $response['items'];
 	}
 
 	// add slips to the booking session
 	public function set($slips=array()) {
-		$response = $this->Checkfront->post('booking/session',array('slip'=>$slips));
+		$response = $this->Checkfront->post('booking/session', array('slip'=>$slips));
 		$this->Checkfront->set_session($response['booking']['session']['id'], $response['booking']['session']);
 		$this->cart();
 	}
@@ -124,7 +126,7 @@ class Booking {
 	// create a booking using the session and the posted form fields
 	public function create($form) {
 		$form['session_id'] = session_id();
-		if($response = $this->Checkfront->post('booking/create',array('form'=>$form))) {
+		if($response = $this->Checkfront->post('booking/create', array('form'=>$form))) {
 			return $response;
 		}
 	}

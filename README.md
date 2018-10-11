@@ -93,7 +93,7 @@ $Checkfront = new Checkfront(
 ```php
 <?php
 // Get items rates and availbility
-$items = $Checkfront->get('item',array(
+$items = $Checkfront->get('item', array(
 			'start_date'=>date('Y-m-d'),
 			'end_date'=>date('Y-m-d',strtotime('+3 days'))
 		));
