@@ -44,16 +44,14 @@ $ composer install
 require 'vendor/autoload.php';
 ```
 Now the needed code should be available within your project. At the top of your PHP script require the autoloader, if you are using a MVC such as CodeIgnitor or Laravel review their autoload guides. 
-Obtain API credintials [https://{your-company}.checkfront.com/manage/developer/](https://{your-company}.checkfront.com/manage/developer/)
 
+**API credintials:** [https://{your-company}.checkfront.com/manage/developer/](https://{your-company}.checkfront.com/manage/developer/)
 
-
----
 
 > The repo example files are a good place to start. 
 
 ```shell
-PHP-SDK                         # → Root of Service
+PHP-SDK                     # → Root of Service
 └── examples/
    └── cart
 	   ├── Cart.php         # → Main wrapper class, ADD API KEY
@@ -64,7 +62,6 @@ PHP-SDK                         # → Root of Service
 ```
 
 #### OAuth2 Access
-
 ```php
 <?php
 $Checkfront = new Checkfront(
@@ -77,50 +74,23 @@ $Checkfront = new Checkfront(
 ?>
 ```
 
+
 #### Token Access
-
-##### OAuth2 Access
-
-```php
-<?
-$Checkfront = new Checkfront(
-    array(
-        'host'=>'your-company.checkfront.com',
-        'consumer_key'  => '5010076404ec1809470508',
-        'consumer_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
-        'redirect_uri'=>'oob',
-    )
-);
-?>
-```
-
-##### Token Access
 
 ```php
 <?php
 $Checkfront = new Checkfront(
-<<<<<<< HEAD
 	array(
-		'host'=>'your-company.checkfront.com',
+		'host' => 'your-company.checkfront.com',
 		'auth_type' => 'token',
-		'api_key'  => '5010076404ec1809470508',
+		'api_key' => '5010076404ec1809470508',
 		'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
 	));
-=======
-    array(
-        'host'=>'your-company.checkfront.com',
-	'auth_type' => 'token',
-        'api_key'  => '5010076404ec1809470508',
-        'api_secret' => 'ba0a5c0c509445024c374fcd264d41e816b02d4e',
-    )
-);
->>>>>>> 04fe00c... Update README.md
 ?>
 ```
 
 #### PHP Examples
 ```php
-<<<<<<< HEAD
 <?php
 // Get items rates and availbility
 $items = $Checkfront->get('item',array(
@@ -130,7 +100,7 @@ $items = $Checkfront->get('item',array(
 
 print_r( $items );
 
-// fetch all bookings
+// Fetch all bookings
 public function query_booking() 
 {
 	$response = $this->Checkfront->get('booking/index');
@@ -138,22 +108,14 @@ public function query_booking()
 }
 
 print_r(query_booking() );
-=======
-<?
-/* Get items rates and availbility*/
-$Checkfront->get('item',array(
-    'start_date'=>date('Y-m-d'),
-    'end_date'=>date('Y-m-d',strtotime('+3 days'))
-));
->>>>>>> 04fe00c... Update README.md
 ?>
 ```
 
----
+
 
 Notifications via Checkfront API
 ===
-Send reminders to guests as they arrive with details and directions. Send a thank you message when they jet home.
+Send reminders to guests as they arrive with details and directions. Send a follow-up thank you message as your guests jet home.
 
 ## Overview
 Traveling to new areas requires planning for the unexpected and help from trusted travel partners. Have tips and maps sent to your guests a day before they arrive via email or text message.
