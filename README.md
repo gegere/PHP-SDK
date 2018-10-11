@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK.svg?branch=develop)](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK)
 
-Checkfront PHP SDK (v3.0)
+Checkfront PHP SDK (v1.3)
 ==========================
 
-The [Checkfront Booking API](http://www.checkfront.com/developers/api/) allows you to build integrations and custom applications that interact with a remote Checkfront account.
+The [Checkfront API 3.0](http://www.checkfront.com/developers/api/) allows you to build integrations and custom applications that interact with a remote Checkfront account.
 
 This repository contains the open source PHP SDK and various example scripts. Except as otherwise noted, the Checkfront PHP SDK is licensed under the Apache Licence, Version 2.0
 (http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -12,7 +12,7 @@ This repository contains the open source PHP SDK and various example scripts. Ex
 
 ## Features
 
-The Checkfront API SDK provides the following functionality:
+The Checkfront API SDK (v1.3) provides the following functionality:
 
 * OAuth2 authorization and authentication.
 * OAuth2 token refresh.
@@ -36,7 +36,7 @@ Let's install Checkfront-PHP-DK via the following few commands:
 >   Type `composer` for more options:
 
 ```
-$ composer init --require="checkfront/checkfront:3.0.*" -n 
+$ composer init --require="checkfront/checkfront:1.3" -n 
 $ composer install
 ```
 
