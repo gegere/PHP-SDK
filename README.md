@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK.svg?branch=develop)](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK)
+[![Build Status](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK.svg?branch=master)](https://travis-ci.org/htmlgraphic/Checkfront-PHP-SDK)
 
 Checkfront PHP SDK (v1.3)
 ==========================
