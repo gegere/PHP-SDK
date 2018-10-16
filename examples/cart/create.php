@@ -34,6 +34,7 @@ header('Content-type: text/html; charset=utf-8');
     i.required { color: orange;  margin: 0 -7px 0 2px; }
     #debug-info { background: #eee; width: 30%; padding: 1em; margin: 1em; box-shadow: inset 0px 0px 3px 0px #333; }
     #debug-info strong { display: block; margin: 1em; }
+    fieldset{border: none;}
   </style>
 </head>
 <body>
@@ -42,6 +43,7 @@ header('Content-type: text/html; charset=utf-8');
     <fieldset>
     <?php
       echo $Form->msg();
+
       if(!count($Form->fields)) {
         echo '<p>ERROR: Cannot fetch fields.</p>';
       } else {
@@ -59,7 +61,9 @@ header('Content-type: text/html; charset=utf-8');
             echo '<br />';
           }
         }
-        echo '<button type="submit"> Continue </button>';
+        echo '<center><button type="submit"> Continue </button></center>';
+
+		echo $Form->fields['custom_policy_msg']['msg']['txt'];
       }
     ?>
       <div id="debug-info">

@@ -108,7 +108,16 @@ class Booking {
 	// get the booking form fields required to make a booking
 	public function form() {
 		$response = $this->Checkfront->get('booking/form');
-		return $response['booking_form_ui'];
+		$booking_policy = array('custom_policy_msg' =>
+		array('msg' =>
+			array('txt' => $response['booking_policy']['body'],
+				  'type' => 'p'))
+		);
+
+		$data = array_merge($response['booking_form_ui'], // form fields
+							$response['booking_policy']['fields'],  // TOS checkbox
+							$booking_policy); // custom policy text to display
+		return $data;
 	}
 
 	// get cart session

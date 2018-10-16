@@ -90,7 +90,7 @@ class Form {
 		if($id === "customer_region"){
 			$html = "<input name='{$id}' id='{$id}' placeholder='BC'></input>";
 		} else {
-			$html = "<select name='{$id}' id='{$id}'>" . 
+			$html = "<select name='{$id}' id='{$id}'>" .
 			$this->build_select_options(
 				$data['define']['layout']['options'],
 				$data['value'],
@@ -110,7 +110,7 @@ class Form {
 	private function build_checkbox($id,$data) {
 		$html = "<input type='checkbox' name='{$id}' id='{$id}' value='1'";
 		if($data['value']) $html .= ' checked="checked"';
-		$html .= "/>";
+		$html .= "/><br /><br />";
 		return $html;
 	}
 
