@@ -5,14 +5,21 @@ Checkfront PHP SDK (v1.3)
 
 The [Checkfront API 3.0](http://www.checkfront.com/developers/api/) allows you to build integrations and custom applications that interact with a remote Checkfront account.
 
-This repository contains the open source PHP SDK and various example scripts. Except as otherwise noted, the Checkfront PHP SDK is licensed under the Apache Licence, Version 2.0
+This repository contains the open source PHP SDK that allows you to utilize the
+above on your website. Except as otherwise noted, the Checkfront PHP SDK
+is licensed under the Apache Licence, Version 2.0
 (http://www.apache.org/licenses/LICENSE-2.0.html)
 
----
+Updates
+-------
 
-## Features
+See [CHANGELOG.md](CHANGELOG.md)
 
-The Checkfront API SDK (v1.3) provides the following functionality:
+
+Features
+--------
+
+The Checkfront API SDK provides the following functionality:
 
 * OAuth2 authorization and authentication.
 * OAuth2 token refresh.

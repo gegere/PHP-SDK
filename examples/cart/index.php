@@ -44,9 +44,10 @@ $items = $Booking->query_inventory(
 		'end_date'=>$date,
 		// change these booking parameters to suit your setup:
 		'param'=>array( 'guests' => 1 )
-	));
+	)
+);
 
-if(count($items)) {
+if (!empty($items)) {
 	$c = 0;
 	foreach($items as $item_id => $item) {
 		if (empty($item['rate']['slip'])) continue;
