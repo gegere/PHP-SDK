@@ -5,8 +5,8 @@
  * This is sample code is for demonstration only and should not be used in production
  * without modifcation.  It does not adequtly secure your OAuth tokens.
  *
- * see: 
- * 
+ * see:
+ *
  * API Documenation:  http://www.checkfront.com/developers/api/
  * API Error Codes:  http://www.checkfront.com/developers/api-error
  * PHP SDK - https://github.com/Checkfront/PHP-SDK
@@ -97,10 +97,8 @@ class Booking {
 	public $cart = array();
 	public $session = array();
 
-	function __construct() {
-		// apply a session_id to the request if one is specified
-		if (!empty($_GET['cart_id'])) { session_id($_GET['cart_id']); }
-		session_start();
+	public function __construct()
+	{
 		// create api connection to Checkfront
 		// generate a token pair under Manage / Developer via your account
 		$this->Checkfront = new CheckfrontAPI(
@@ -141,6 +139,7 @@ class Booking {
 	public function form()
 	{
 		$response = $this->Checkfront->get('booking/form');
+
 		$booking_policy = array('custom_policy_msg' =>
 		array('msg' =>
 			array('txt' => $response['booking_policy']['body'],
@@ -183,5 +182,5 @@ class Booking {
 	{
 		$response = $this->Checkfront->get('booking/session/clear');
 		$this->Checkfront->session_clear();
-	}	
+	}
 }
