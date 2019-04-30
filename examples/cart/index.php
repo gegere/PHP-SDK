@@ -25,16 +25,29 @@ $date = (isset($_GET['date'])) ? date('Y-m-d',strtotime($_GET['date'])) : date('
 ?>
 <html>
 <head>
-<style style="text/css">body { font:90% "Helvetica Neue",Helvetica,Arial,sans-serif; }</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style type="text/css">
+html { margin-bottom: 200px; }
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<div class="container">
+<div class="row">
+<div class="col">
 <h1>Reservations Booking Demo</h1>
 <p>This is a bare bones example of how to query inventory items from the Checkfront API, add them to a booking session, and create a new booking. This is a shopping cart style demo that allows you to add and remove multiple items to a booking before proceeding.</p>
+</div>
+</div>
+<div class="row">
 <!-- it may be preferred to set this in your local session -->
-<div style="width: 500px; float: left;">
-<h3>Available Items</h3>
+<div class="col">
+<p>&nbsp;</p>
 <form method="get" action="" accept-charset="utf-8">
-Date: <input type="date" name="date" value="<?php echo $date?>" /> <input type="submit" value=" Search" />
+Date: <input type="date" name="date" value="<?php echo $date?>" /> <input type="submit" class="btn btn-link" value="Search" />
 <ul style="list-style: none; padding:0">
 <?php
 
@@ -52,7 +65,7 @@ if (!empty($items)) {
 	foreach($items as $item_id => $item) {
 		if (empty($item['rate']['slip'])) continue;
 		echo '<li style="padding: 1em; border-bottom: solid 1px #ccc;">';
-		echo "<input type='checkbox' name='slip[]' value='{$item['rate']['slip']}' id='item_{$item_id}' /><strong>{$item['name']}</strong><br />";
+		echo "<input type='checkbox' name='slip[]' value='{$item['rate']['slip']}' id='item_{$item_id}' /><strong> {$item['name']}</strong><br />";
 		echo " -  {$item['rate']['available']} available for {$item['rate']['summary']['date']}<br />";
 		//	echo '<p>' . nl2br($item['summary']) . '</p>';
 		echo "&nbsp; <small style='color: #999;'>SLIP: {$item['rate']['slip']}</small><br />";
@@ -63,11 +76,12 @@ if (!empty($items)) {
 }
 ?>
 </ul>
-<input type="submit" value=" Add To Booking ">
+<div class="text-center">
+<input type="submit" class="btn btn-success" value="Add To Booking">
+</div>
 </form>
 </div>
-<div style="float: left; margin-left: 10px;">
-<div style="background: #eee; width: 250px; min-height: 300px; padding: 10px; border-radius: 10px;">
+<div class="col-6">
 <form method="get" action="create.php">
 <h3>Shopping Cart <?php echo intval(count($Booking->cart))?></h3>
 <ul style="padding: 0; list-style: none;">
@@ -92,12 +106,15 @@ if(count($Booking->cart)) {
 }
 ?>
 </ul>
-</div>
+
 <a href="<?php echo $_SERVER['SCRIPT_NAME']?>?reset=1">Clear session</a>
 </form>
 <pre style="margin-left: 10px">
 <strong>Debug Information</strong>
 Cart ID: <input type="text" readonly="readonly" name="cart_id" value="<?php echo session_id()?>" /><br />
 <pre><?php if (!empty($Booking->Checkfront->error)) print_r($Booking->Checkfront->error)?></pre>
+</div>
+</div>
+</div>
 </body>
 </html>
